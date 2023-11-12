@@ -51,14 +51,25 @@ class Paddle:
             elif event.key == pg.K_s:
                 self.move_down2 = False
 
+    # Left Paddle
+
     def move1(self, line):
         if self.move_up1 and not self.paddles[1].colliderect(line):
             self.paddles[1].y -= 10
         elif self.move_down1 and not self.paddles[1].colliderect((0, 500, 800, 2)):
             self.paddles[1].y += 10
 
+    # Right Paddle
+
     def move2(self, line):
         if self.move_up2 and not self.paddles[0].colliderect(line):
             self.paddles[0].y -= 10
         elif self.move_down2 and not self.paddles[0].colliderect((0, 500, 800, 2)):
             self.paddles[0].y += 10
+
+    def move_ai(self, ball, line):
+        if ball.x > 400:
+            if ball.centery < self.paddles[1].centery and not self.paddles[1].colliderect(line):
+                self.paddles[1].y -= 10
+            elif ball.centery > self.paddles[1].centery and not self.paddles[1].colliderect((0, 500, 800, 2)):
+                self.paddles[1].y += 10
